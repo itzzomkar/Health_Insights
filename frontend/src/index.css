@@ -249,4 +249,25 @@ body {
     max-width: 90vw !important;
   }
   .main-content { padding: 1rem !important; }
+
+  .login-header {
+    flex-direction: column !important;
+    padding: 1.5rem !important;
+    gap: 1rem !important;
+  }
+  .login-header-left, .login-header-center {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+  .login-split-container {
+    flex-direction: column !important;
+  }
+  .login-split-left {
+    flex: 1 1 auto !important;
+    padding: 2rem 1.5rem !important;
+    border-top-right-radius: 0 !important;
+  }
+  .login-split-right {
+    display: none !important;
+  }
 }

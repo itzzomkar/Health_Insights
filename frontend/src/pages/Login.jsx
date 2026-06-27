@@ -37,7 +37,7 @@ export default function Login() {
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100vw', backgroundColor: 'transparent', transition: 'background-color 0.4s' }}>
       
       {/* Top Header Navigation */}
-      <div style={{ 
+      <div className="login-header" style={{ 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'space-between', 
@@ -46,7 +46,7 @@ export default function Login() {
         borderBottom: '1px solid transparent',
       }}>
         {/* Left: Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+        <div className="login-header-left" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
           <div style={{ backgroundColor: 'var(--primary-color)', color: 'white', padding: '0.4rem', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <HeartPulse size={20} strokeWidth={2.5} />
           </div>
@@ -56,7 +56,7 @@ export default function Login() {
         </div>
 
         {/* Center: Navigation Links */}
-        <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
+        <div className="login-header-center" style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
           <button className={`nav-link ${activeView === 'home' ? 'active' : ''}`} onClick={() => setActiveView('home')}>
             Home
           </button>
@@ -71,9 +71,9 @@ export default function Login() {
       </div>
 
       {/* Main Content: Split Screen Login */}
-      <div style={{ display: 'flex', flex: 1 }}>
+      <div className="login-split-container" style={{ display: 'flex', flex: 1 }}>
         {/* Left Column - Dynamic Content */}
-        <div style={{ 
+        <div className="login-split-left" style={{ 
           flex: '0 0 45%', 
           backgroundColor: 'transparent', 
           display: 'flex', 
@@ -85,7 +85,7 @@ export default function Login() {
           overflowY: 'auto'
         }}>
           {activeView === 'home' && (
-            <div style={{ maxWidth: '400px', width: '100%', margin: '0 auto', animation: 'fadeIn 0.5s ease-out' }}>
+            <div className="login-form-wrapper" style={{ maxWidth: '400px', width: '100%', margin: '0 auto', animation: 'fadeIn 0.5s ease-out' }}>
               <div style={{ marginBottom: '2.5rem' }}>
                 <h1 style={{ color: 'var(--text-main)', fontSize: '1.75rem', fontWeight: 700, marginBottom: '0.5rem' }}>
                   <span style={{ color: 'var(--primary-color)' }}>Health</span>Insights
@@ -250,7 +250,7 @@ export default function Login() {
         </div>
 
         {/* Right Column - Illustration */}
-        <div style={{ 
+        <div className="login-split-right" style={{ 
           flex: '1', 
           backgroundColor: 'transparent', 
           display: 'flex', 
