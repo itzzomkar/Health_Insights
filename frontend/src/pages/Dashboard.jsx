@@ -446,14 +446,13 @@ export default function Dashboard() {
           {/* User Profile */}
           {currentUser && (
             <div 
-              className="header-profile"
+              className="header-profile hover-lift"
               onClick={() => setActiveFeature('profile')}
-              style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderLeft: '1px solid var(--border-color)', paddingLeft: '1.25rem', cursor: 'pointer' }}
-              className="hover-lift">
+              style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderLeft: '1px solid var(--border-color)', paddingLeft: '1.25rem', cursor: 'pointer' }}>
               <div style={{ width: '36px', height: '36px', borderRadius: '50%', backgroundColor: 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '1rem' }}>
                 {currentUser.user_metadata?.full_name ? currentUser.user_metadata.full_name.charAt(0).toUpperCase() : currentUser.email.charAt(0).toUpperCase()}
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div className="profile-text" style={{ display: 'flex', flexDirection: 'column' }}>
                 <span style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-main)', lineHeight: 1.2 }}>{currentUser.user_metadata?.full_name || 'User'}</span>
                 <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{currentUser.email}</span>
               </div>
