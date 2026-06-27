@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.routers import auth, analysis, chat, upload
+from api.routers import auth, analysis, chat, upload, locator
 
 app = FastAPI(
     title="HIA - Health Insights Agent API",
@@ -30,6 +30,7 @@ app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(analysis.router, prefix="/api/analysis", tags=["Analysis"])
 app.include_router(chat.router, prefix="/api/chat", tags=["Chat"])
 app.include_router(upload.router, prefix="/api/upload", tags=["Upload"])
+app.include_router(locator.router, prefix="/api/locator", tags=["Locator"])
 
 @app.get("/")
 async def root():

@@ -59,23 +59,11 @@ export default function DoctorLocator({ onBookAppointment }) {
   const fetchNearbyClinics = async (lat, lon) => {
     try {
       setIsLoading(true);
-      // Radius in meters (10km)
-      const radius = 10000; 
-      
-      const query = `
-        [out:json];
-        (
-          node["amenity"="hospital"](around:${radius},${lat},${lon});
-          node["amenity"="clinic"](around:${radius},${lat},${lon});
-          node["amenity"="doctors"](around:${radius},${lat},${lon});
-        );
-        out body;
-      `;
-
-      const response = await axios.post('https://overpass-api.de/api/interpreter', query, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
+      // Fetch from our backend proxy instead of calling Overpass directly to avoid Vercel CORS issues
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await axios.post(`${API_URL}/api/locator/clinics`, {
+        lat: lat,
+        lon: lon
       });
 
       if (response.data && response.data.elements) {
