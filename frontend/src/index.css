@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary-color: #ec4899; /* Pink-500 to match aesthetic */
+  --primary-hover: #db2777; /* Pink-600 */
+  --bg-color: #ffffff; /* bg-white from the Pattern Craft snippet */
+  --card-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%); /* True glass gradient */
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: rgba(255, 255, 255, 0.4);
+  --card-backdrop: blur(40px);
+  --pattern-grid: rgba(15, 23, 42, 0.1);
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --radius-md: 8px;
+  --radius-lg: 16px; /* slightly more rounded */
+  --radius-full: 9999px; /* for pill buttons */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.05); /* Softer shadows like image */
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
+  
+  /* Additional variables needed for smooth dark mode */
+  --input-bg: #f8fafc;
+  --input-border: #cbd5e1;
+  --chat-agent-bg: rgba(255, 255, 255, 0.6);
+  --chat-agent-text: var(--text-main);
+  --chat-user-bg: var(--primary-color);
+  --chat-user-text: #ffffff;
+}
+
+body.dark {
+  --bg-color: #020617; /* Deep slate background */
+  --card-bg: rgba(30, 41, 59, 0.6);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: rgba(51, 65, 85, 0.5);
+  --card-backdrop: blur(16px);
+  --pattern-grid: rgba(248, 250, 252, 0.03);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --input-bg: #0f172a;
+  --input-border: #334155;
+  --chat-agent-bg: #334155;
+  --chat-agent-text: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Full-Screen Soft Pink Glow */
+  background-color: #fce7f3; /* Soft pink base so there's no pure white */
+  background-image: radial-gradient(circle at center, #fbb6ce 0%, transparent 100%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text-main);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Minimalist Button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: #f1f5f9;
+}
+
+/* Minimalist Input */
+.input-field {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-md);
+  background-color: rgba(255, 255, 255, 0.35); /* Glassy inputs */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.1);
+}
+
+/* UI UX Pro Max Gradients */
+.gradient-text {
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); /* Deep Pink to Violet */
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+  display: inline-block;
+}
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  backdrop-filter: var(--card-backdrop);
+  -webkit-backdrop-filter: var(--card-backdrop);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08); /* Darker shadow to lift it off the background */
+  border: 1px solid var(--border-color);
+  border-top: 1px solid rgba(255, 255, 255, 1); /* Crisp white top edge */
+  border-left: 1px solid rgba(255, 255, 255, 0.8);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 1.5rem;
+}
+
+/* AI Agent Box */
+.ai-agent-box {
+  background-color: #f0fdfa; /* Soft teal background */
+  border-left: 4px solid #0d9488; /* Teal border */
+  padding: 1rem 1.5rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #115e59;
+}
+
+/* Page Transitions */
+.page-fade-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.page-fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.page-fade-exit {
+  opacity: 1;
+}
+
+/* Markdown Chat Styling */
+.markdown-chat p {
+  margin: 0 0 0.5rem 0;
+  color: var(--chat-agent-text);
+}
+.markdown-chat p:last-child {
+  margin-bottom: 0;
+}
+.markdown-chat strong {
+  font-weight: 700;
+  color: var(--chat-agent-text);
+}
+.markdown-chat ul, .markdown-chat ol {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+  color: var(--chat-agent-text);
+}
+.markdown-chat li {
+  margin-bottom: 0.25rem;
+}
+
+/* Microphone Pulse Animation */
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* Custom Scrollbar for Glass Panels */
+.glass-scroll {
+  overflow-y: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.glass-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+.mic-pulsing {
+  animation: pulse-ring 1.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  color: #ef4444 !important;
+}.page-fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
