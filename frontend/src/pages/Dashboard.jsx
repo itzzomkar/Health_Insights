@@ -468,7 +468,7 @@ export default function Dashboard() {
       </div>
 
       {/* Main Content Area */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '3rem 2rem' }}>
+      <div className="main-content" style={{ flex: 1, overflowY: 'auto', padding: '3rem 2rem' }}>
         <div style={{ maxWidth: activeFeature === 'locator' ? '1600px' : ((activeFeature === 'analysis' || activeFeature === 'diet' || activeFeature === 'schedule') && analysisResult && !isAnalyzing ? '1400px' : '900px'), margin: '0 auto', transition: 'max-width 0.4s ease-out', width: '100%' }}>
           
           {/* VIEW: HOME / ABOUT US */}

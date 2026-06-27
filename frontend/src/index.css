@@ -215,7 +215,8 @@ body {
   opacity: 0;
   transition: opacity 300ms;
 }
-
+
+
 
 /* Mobile Responsive Overrides */
 @media (max-width: 768px) {
@@ -247,4 +248,5 @@ body {
     width: 280px !important;
     max-width: 90vw !important;
   }
+  .main-content { padding: 1rem !important; }
 }
