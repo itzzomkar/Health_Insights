@@ -61,7 +61,7 @@ Follow these steps to run the Health Insights Agent locally:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/Health_Insights.git
+git clone https://github.com/itzzomkar/Health_Insights.git
 cd Health_Insights
 ```
 
