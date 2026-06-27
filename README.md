@@ -29,6 +29,8 @@ By combining state-of-the-art **Multi-Agent Orchestration (ADK)** with **Model C
 
 ## 🏗️ Architecture & Key Technologies
 
+![System Architecture](public/architecture.png)
+
 HIA is built on a modern, decoupled Full-Stack architecture:
 
 - **Frontend**: React (Vite) + Vanilla CSS Glassmorphism UI
@@ -52,6 +54,35 @@ Security is paramount in healthcare:
 - **Row Level Security (RLS)**: Powered by Supabase, ensuring users can only query their own patient data.
 - **Environment Isolation**: API keys (Groq, Mapbox, Supabase) are strictly isolated in `.env` files.
 - **JWT Authentication**: Secure, token-based sessions protect all API endpoints from unauthorized access.
+
+---
+
+## 📸 Application Screenshots
+
+<p align="center">
+  <img src="public/Ui1.png" width="49%" />
+  <img src="public/Ui2.png" width="49%" />
+</p>
+<p align="center">
+  <img src="public/Ui3.png" width="49%" />
+  <img src="public/Ui4.png" width="49%" />
+</p>
+<p align="center">
+  <img src="public/Ui5.png" width="49%" />
+  <img src="public/Ui6.png" width="49%" />
+</p>
+<p align="center">
+  <img src="public/Ui7.png" width="49%" />
+  <img src="public/Ui8.png" width="49%" />
+</p>
+<p align="center">
+  <img src="public/Ui9.png" width="49%" />
+  <img src="public/Ui10.png" width="49%" />
+</p>
+<p align="center">
+  <img src="public/Ui11.png" width="49%" />
+  <img src="public/Ui12.png" width="49%" />
+</p>
 
 ---
 
