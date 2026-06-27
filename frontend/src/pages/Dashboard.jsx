@@ -359,7 +359,7 @@ export default function Dashboard() {
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: 'transparent' }}>
       
         {/* Top Header Navigation (Like Reference Image) */}
-      <div style={{ 
+      <div className="dashboard-header" style={{ 
         display: 'flex', 
         alignItems: 'center', 
         justifyContent: 'space-between', 
@@ -370,7 +370,7 @@ export default function Dashboard() {
       }}>
         
         {/* Left: Brand / Logo */}
-        <div onClick={() => setActiveFeature('home')} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', padding: '0.5rem', flex: 1, justifyContent: 'flex-start' }}>
+        <div className="header-left" onClick={() => setActiveFeature('home')} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', padding: '0.5rem', flex: 1, justifyContent: 'flex-start' }}>
           <div style={{ backgroundColor: 'var(--primary-color)', color: 'white', padding: '0.4rem', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <HeartPulse size={20} strokeWidth={2.5} />
           </div>
@@ -380,7 +380,7 @@ export default function Dashboard() {
         </div>
 
         {/* Center: Navigation Links */}
-        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="header-center" style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', justifyContent: 'center' }}>
           <button className={`nav-link ${activeFeature === 'analysis' ? 'active' : ''}`} onClick={() => setActiveFeature('analysis')}>
             Analysis
           </button>
@@ -402,7 +402,7 @@ export default function Dashboard() {
         </div>
 
         {/* Right: Notifications, Profile, Theme Toggle, & Sign Out */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', position: 'relative', flex: 1, justifyContent: 'flex-end' }}>
+        <div className="header-right" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', position: 'relative', flex: 1, justifyContent: 'flex-end' }}>
           
           {/* Notifications Bell */}
           <div>
@@ -417,7 +417,7 @@ export default function Dashboard() {
 
             {/* Notifications Dropdown */}
             {showNotifications && (
-              <div style={{ position: 'absolute', top: 'calc(100% + 15px)', right: '120px', width: '320px', backgroundColor: 'white', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid var(--border-color)', zIndex: 100, padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', animation: 'fadeIn 0.2s ease-out' }}>
+              <div className="notifications-dropdown" style={{ position: 'absolute', top: 'calc(100% + 15px)', right: '120px', width: '320px', backgroundColor: 'white', borderRadius: '16px', boxShadow: '0 10px 25px rgba(0,0,0,0.1)', border: '1px solid var(--border-color)', zIndex: 100, padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', animation: 'fadeIn 0.2s ease-out' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.5rem' }}>
                   <h4 style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text-main)' }}>Notifications</h4>
                   <span style={{ fontSize: '0.7rem', backgroundColor: '#fce7f3', color: 'var(--primary-color)', padding: '0.2rem 0.5rem', borderRadius: 'full', fontWeight: 600 }}>{notifications.length} upcoming</span>
@@ -446,6 +446,7 @@ export default function Dashboard() {
           {/* User Profile */}
           {currentUser && (
             <div 
+              className="header-profile"
               onClick={() => setActiveFeature('profile')}
               style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderLeft: '1px solid var(--border-color)', paddingLeft: '1.25rem', cursor: 'pointer' }}
               className="hover-lift">
