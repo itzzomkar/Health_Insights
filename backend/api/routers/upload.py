@@ -1,26 +1,42 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
-import fitz  # PyMuPDF
-import easyocr
+import pdfplumber
+import base64
+import os
+from groq import Groq
+import io
 
 router = APIRouter()
 
-# Initialize EasyOCR reader (loads model into memory)
-# We set gpu=True, but it will automatically fall back to CPU if no GPU is available.
-try:
-    reader = easyocr.Reader(['en'], gpu=True)
-except Exception as e:
-    print(f"Warning: EasyOCR failed to initialize with GPU, falling back to CPU. {e}")
-    reader = easyocr.Reader(['en'], gpu=False)
+def get_groq_client():
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        raise ValueError("GROQ_API_KEY environment variable is not set")
+    return Groq(api_key=api_key)
 
 async def extract_text_from_image_bytes(image_bytes: bytes) -> str:
-    """Uses EasyOCR to extract text from image bytes."""
+    """Uses Groq Vision model to extract text from image bytes."""
     try:
-        results = reader.readtext(image_bytes)
-        extracted_text = "\n".join([text for (bbox, text, prob) in results])
-        return extracted_text
+        base64_image = base64.b64encode(image_bytes).decode('utf-8')
+        client = get_groq_client()
+        
+        response = client.chat.completions.create(
+            model="llama-3.2-11b-vision-preview",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": "Extract all the text from this medical document/image. Output ONLY the raw text exactly as it appears. Do not add any conversational filler."},
+                        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}}
+                    ]
+                }
+            ],
+            max_tokens=1024,
+            temperature=0.0
+        )
+        return response.choices[0].message.content
     except Exception as e:
-        print(f"OCR Error: {e}")
-        return ""
+        print(f"Vision OCR Error: {e}")
+        return "Could not extract text from image using Vision AI."
 
 @router.post("/")
 async def upload_document(file: UploadFile = File(...)):
@@ -30,26 +46,20 @@ async def upload_document(file: UploadFile = File(...)):
         
         extracted_text = ""
         
-        # 1. Handle PDF (Local Extraction first)
+        # 1. Handle PDF
         if filename.endswith(".pdf"):
-            doc = fitz.open(stream=content, filetype="pdf")
-            for page in doc:
-                extracted_text += page.get_text() + "\n"
+            with pdfplumber.open(io.BytesIO(content)) as pdf:
+                for page in pdf.pages:
+                    page_text = page.extract_text()
+                    if page_text:
+                        extracted_text += page_text + "\n"
             
-            # If the PDF is just an image (no text extracted), convert to image and use OCR
             if len(extracted_text.strip()) < 20:
-                print("PDF seems to be a scanned image. Falling back to local OCR...")
-                page = doc.load_page(0)
-                pix = page.get_pixmap()
-                img_data = pix.tobytes("png")
+                return {"extracted_text": "PDF appears to be a scanned image. Please upload as JPG/PNG to use Vision OCR."}
                 
-                extracted_text = await extract_text_from_image_bytes(img_data)
-            
-            doc.close()
-            
-        # 2. Handle Images (Local OCR)
+        # 2. Handle Images (Cloud Vision OCR)
         elif filename.endswith((".png", ".jpg", ".jpeg")):
-            print("Image detected. Running local OCR...")
+            print("Image detected. Running Cloud Vision OCR...")
             extracted_text = await extract_text_from_image_bytes(content)
             
         else:
