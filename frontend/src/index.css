@@ -226,8 +226,8 @@ body {
     grid-template-areas: 
       "logo right"
       "nav nav" !important;
-    padding: 1rem !important;
-    gap: 1rem !important;
+    padding: 0.75rem 0.5rem !important;
+    gap: 0.5rem !important;
     align-items: center !important;
   }
   .header-left {
@@ -237,12 +237,20 @@ body {
     padding: 0 !important;
     flex: none !important;
   }
+  .header-left h2 {
+    font-size: 1.1rem !important;
+  }
   .header-right {
     grid-area: right;
     width: auto !important;
     justify-content: flex-end !important;
-    gap: 0.5rem !important;
+    gap: 0.25rem !important;
     flex: none !important;
+  }
+  .header-right button.pill-btn-danger {
+    padding: 0.35rem 0.6rem !important;
+    font-size: 0.75rem !important;
+    margin-left: 0.25rem !important;
   }
   .header-center {
     grid-area: nav;
@@ -301,5 +309,19 @@ body {
   }
   .login-split-right {
     display: none !important;
+  }
+
+  .care-schedule-container, .locator-container {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+  .calendar-wrapper {
+    overflow-x: auto !important;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+  .calendar-wrapper::-webkit-scrollbar {
+    display: none;
   }
 }

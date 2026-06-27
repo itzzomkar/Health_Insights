@@ -227,14 +227,15 @@ export default function CareSchedule({ initialClinic = null, onScheduleClose = n
         </div>
 
         {/* Calendar Grid */}
-        <div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.5rem', textAlign: 'center', marginBottom: '1rem' }}>
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-              <div key={day} style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{day}</div>
-            ))}
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.5rem' }}>
-            {calendarDays.map((d, i) => {
+        <div className="calendar-wrapper">
+          <div style={{ minWidth: '400px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.5rem', textAlign: 'center', marginBottom: '1rem' }}>
+              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                <div key={day} style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase' }}>{day}</div>
+              ))}
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.5rem' }}>
+              {calendarDays.map((d, i) => {
               const isSelected = d.date.toDateString() === selectedDate.toDateString();
               const dayStr = formatDateLocal(d.date);
               const hasAppt = appointments.some(a => a.date === dayStr);
@@ -267,6 +268,7 @@ export default function CareSchedule({ initialClinic = null, onScheduleClose = n
                 </div>
               );
             })}
+          </div>
           </div>
         </div>
       </div>

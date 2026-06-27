@@ -182,7 +182,8 @@ export default function DoctorLocator({ onBookAppointment }) {
       
       {/* Sidebar: Glassmorphism Clinic List */}
       <div className="glass-panel" style={{ 
-        width: '380px', 
+        width: '100%', 
+        maxWidth: '380px', 
         height: '100%', 
         position: 'absolute', 
         left: 0, 
