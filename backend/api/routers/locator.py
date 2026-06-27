@@ -22,12 +22,13 @@ async def get_clinics(req: LocationRequest):
         out body;
     """
     try:
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(timeout=30.0) as client:
             # We use httpx to make the request from the Render server instead of the browser
+            # Overpass API requires a custom User-Agent and data payload format or it returns 406 Not Acceptable
             response = await client.post(
                 'https://overpass-api.de/api/interpreter',
-                data=query,
-                headers={'Content-Type': 'application/x-www-form-urlencoded'}
+                data={'data': query},
+                headers={'User-Agent': 'HealthInsightsApp/1.0 (KaggleCapstone)'}
             )
             response.raise_for_status()
             return response.json()
