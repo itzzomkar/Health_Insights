@@ -14,53 +14,58 @@ def get_groq_client():
     return Groq(api_key=api_key)
 
 async def extract_text_from_image_bytes(image_bytes: bytes) -> str:
-    """Uses Groq Vision model to extract text from image bytes."""
+    """Uses OCR.space free API to extract text from image bytes."""
     try:
+        import requests
         from PIL import Image
         
-        # 1. Open the image with PIL
+        # 1. Compress image to guarantee it's under OCR.space's 1MB limit
         img = Image.open(io.BytesIO(image_bytes))
-        
-        # 2. Convert to RGB (in case it's RGBA/PNG)
         if img.mode != 'RGB':
             img = img.convert('RGB')
             
-        # 3. Resize if too large (Groq has limits)
         max_size = 1024
         if img.width > max_size or img.height > max_size:
             img.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
             
-        # 4. Save as heavily compressed JPEG to guarantee it fits under Groq's 4MB limit
         buffer = io.BytesIO()
         img.save(buffer, format="JPEG", quality=75)
         optimized_bytes = buffer.getvalue()
         
-        # 5. Base64 encode the guaranteed valid JPEG
-        base64_image = base64.b64encode(optimized_bytes).decode('utf-8')
+        # 2. Base64 encode for OCR.space
+        base64_image = "data:image/jpeg;base64," + base64.b64encode(optimized_bytes).decode('utf-8')
         
-        client = get_groq_client()
-        
-        response = client.chat.completions.create(
-            model="llama-3.2-90b-vision-preview",
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": "Extract all the text from this medical document/image. Output ONLY the raw text exactly as it appears. Do not add any conversational filler. If the image is blurry, extract whatever you can see."},
-                        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}}
-                    ]
-                }
-            ],
-            max_tokens=2048,
-            temperature=0.0
+        # 3. Request OCR.space API (helloworld is the public free tier key)
+        resp = requests.post(
+            "https://api.ocr.space/parse/image",
+            data={
+                "base64image": base64_image,
+                "language": "eng",
+                "isTable": "true",
+                "scale": "true"
+            },
+            headers={"apikey": "helloworld"}
         )
-        text = response.choices[0].message.content
+        
+        result = resp.json()
+        
+        if result.get("IsErroredOnProcessing"):
+            print(f"OCR.space Error: {result.get('ErrorMessage')}")
+            return "The document text could not be extracted. Please upload a clear medical PDF instead."
+            
+        parsed_results = result.get("ParsedResults", [])
+        if not parsed_results:
+            return "No text could be found in this image."
+            
+        text = parsed_results[0].get("ParsedText", "")
         if not text or len(text.strip()) < 5:
-            return "Vision AI could not read this document."
+            return "No legible text was found in this image. Please upload a clearer image or a PDF."
+            
         return text
     except Exception as e:
         print(f"Vision OCR Error: {e}")
         return "The document text could not be extracted due to low image quality."
+
 
 @router.post("/")
 async def upload_document(file: UploadFile = File(...)):

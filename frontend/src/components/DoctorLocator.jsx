@@ -72,7 +72,11 @@ export default function DoctorLocator({ onBookAppointment }) {
         out body;
       `;
 
-      const response = await axios.get(`https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`);
+      const response = await axios.post('https://overpass-api.de/api/interpreter', query, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
 
       if (response.data && response.data.elements) {
         const fetchedClinics = response.data.elements.map((el) => {
