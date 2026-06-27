@@ -358,7 +358,7 @@ export default function Dashboard() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: 'transparent' }}>
       
-      {/* Top Header Navigation (Like Reference Image) */}
+        {/* Top Header Navigation (Like Reference Image) */}
       <div style={{ 
         display: 'flex', 
         alignItems: 'center', 
@@ -370,7 +370,7 @@ export default function Dashboard() {
       }}>
         
         {/* Left: Brand / Logo */}
-        <div onClick={() => setActiveFeature('home')} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', padding: '0.5rem' }}>
+        <div onClick={() => setActiveFeature('home')} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer', padding: '0.5rem', flex: 1, justifyContent: 'flex-start' }}>
           <div style={{ backgroundColor: 'var(--primary-color)', color: 'white', padding: '0.4rem', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <HeartPulse size={20} strokeWidth={2.5} />
           </div>
@@ -380,7 +380,7 @@ export default function Dashboard() {
         </div>
 
         {/* Center: Navigation Links */}
-        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', justifyContent: 'center' }}>
           <button className={`nav-link ${activeFeature === 'analysis' ? 'active' : ''}`} onClick={() => setActiveFeature('analysis')}>
             Analysis
           </button>
@@ -402,7 +402,7 @@ export default function Dashboard() {
         </div>
 
         {/* Right: Notifications, Profile, Theme Toggle, & Sign Out */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', position: 'relative' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', position: 'relative', flex: 1, justifyContent: 'flex-end' }}>
           
           {/* Notifications Bell */}
           <div>
