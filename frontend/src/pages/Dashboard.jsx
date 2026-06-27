@@ -380,7 +380,7 @@ export default function Dashboard() {
         </div>
 
         {/* Center: Navigation Links */}
-        <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
           <button className={`nav-link ${activeFeature === 'analysis' ? 'active' : ''}`} onClick={() => setActiveFeature('analysis')}>
             Analysis
           </button>
