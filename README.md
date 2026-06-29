@@ -125,4 +125,4 @@ Open your browser and navigate to `http://localhost:5173`. You will be greeted b
 Building HIA was an incredible journey of exploring the limits of Agentic AI. Our biggest hurdle was latency—waiting for a single LLM to generate a massive medical report took too long. By pivoting to a Multi-Agent architecture using `asyncio.gather()`, we cut response times by 80% while simultaneously increasing the accuracy and depth of the medical advice. We are incredibly proud of the seamless, Apple-like UI we achieved on the frontend to make this complex AI accessible to everyday users.
 
 *Disclaimer: Health Insights is an AI tool and not a doctor. All analysis is for informational purposes only.*
-
+*Finally this might help a lot of people across the world who are not related to the medical field to give them a perfect and accurate analysis of their report.*
