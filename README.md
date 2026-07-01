@@ -2,7 +2,7 @@
 
 <!-- ![Health Insights Hero](public/HIA_demo.gif)  (UNCOMMENT THIS ONCE YOU RECORD A NEW DEMO) -->
 
-## 🏆 Kaggle X Medical Capstone Submission
+## 🏆 Kaggle X Google Capstone Submission
 
 **Health Insights Agent (HIA)** is a next-generation, AI-powered personal health management platform designed to democratize access to expert-level medical guidance. By utilizing a sophisticated **Multi-Agent Architecture**, HIA moves beyond standard medical chatbots to provide proactive, localized, and highly accurate health management tools for everyone.
 
